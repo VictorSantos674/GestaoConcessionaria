@@ -1,0 +1,93 @@
+:root {
+  --bg: #ffffff;
+  --text: #111;
+  --primary: #4f46e5;
+  --button-bg: #4f46e5;
+  --button-text: #fff;
+  --correct: #22c55e;
+  --incorrect: #ef4444;
+}
+
+[data-theme='dark'] {
+  --bg: #121212;
+  --text: #f1f1f1;
+  --button-bg: #6366f1;
+  --button-text: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+input,
+select,
+button {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 300px;
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #3730a3;
+}
+
+button.correct {
+  background-color: var(--correct);
+}
+
+button.incorrect {
+  background-color: var(--incorrect);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.question-card {
+  max-width: 700px;
+  width: 100%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .question-card {
+    padding: 1rem;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
