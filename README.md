@@ -1,6 +1,5 @@
 # 🎮 Trivia Master - Quiz Interativo com React
 
-![Trivia Banner](https://user-images.githubusercontent.com/67465474/README-trivia-banner.png)
 
 Um quiz interativo desenvolvido com **React**, que desafia o usuário com perguntas de múltipla escolha utilizando a API pública [Open Trivia DB](https://opentdb.com/). Com cronômetro, ranking local, tema escuro/claro e animações suaves, o app oferece uma experiência moderna e dinâmica.
 
@@ -16,13 +15,6 @@ Um quiz interativo desenvolvido com **React**, que desafia o usuário com pergun
 - ✅ Personalização: nome do jogador, dificuldade e número de perguntas
 - ✅ Responsivo para dispositivos móveis
 - ✅ Interface agradável e intuitiva
-
----
-
-## 📸 Preview
-
-![preview-light](https://user-images.githubusercontent.com/67465474/trivia-light-mode.png)
-![preview-dark](https://user-images.githubusercontent.com/67465474/trivia-dark-mode.png)
 
 ---
 
