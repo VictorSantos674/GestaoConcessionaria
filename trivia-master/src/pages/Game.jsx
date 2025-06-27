@@ -29,13 +29,19 @@ export default function Game({ config, setScore }) {
   };
 
   useEffect(() => {
-    if (current >= questions.length && questions.length > 0) {
+    if (questions.length && current >= questions.length) {
       setScore(localScore);
       navigate('/end');
     }
   }, [current, questions, localScore, setScore, navigate]);
 
-  if (loading) return <p>Carregando perguntas...</p>;
+  if (loading) {
+    return (
+      <div className="question-card">
+        <p>⏳ Carregando perguntas...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="question-card">

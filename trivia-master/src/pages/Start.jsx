@@ -8,7 +8,9 @@ export default function Start({ setConfig }) {
   const navigate = useNavigate();
 
   const startGame = () => {
-    if (!name) return alert('Digite seu nome!');
+    if (name.trim().length < 2) {
+      return alert('Digite um nome válido!');
+    }
     setConfig({ name, difficulty, amount });
     navigate('/game');
   };
@@ -17,15 +19,18 @@ export default function Start({ setConfig }) {
     <div className="question-card">
       <h1>🎮 Trivia Master</h1>
 
+      <label htmlFor="name">Seu nome:</label>
       <input
+        id="name"
         type="text"
-        placeholder="Seu nome"
+        placeholder="Digite seu nome"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
 
-      <label>Dificuldade:</label>
+      <label htmlFor="difficulty">Dificuldade:</label>
       <select
+        id="difficulty"
         value={difficulty}
         onChange={(e) => setDifficulty(e.target.value)}
       >
@@ -34,8 +39,9 @@ export default function Start({ setConfig }) {
         <option value="hard">Difícil</option>
       </select>
 
-      <label>Quantidade de Perguntas:</label>
+      <label htmlFor="amount">Quantidade de Perguntas:</label>
       <input
+        id="amount"
         type="number"
         min="1"
         max="50"

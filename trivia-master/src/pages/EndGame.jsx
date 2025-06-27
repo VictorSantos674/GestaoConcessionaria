@@ -8,6 +8,8 @@ export default function EndGame({ score, onRestart }) {
   const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
+    if (!name.trim()) return;
+
     const newRanking = [...ranking, { name, score }];
     newRanking.sort((a, b) => b.score - a.score);
     setRanking(newRanking.slice(0, 10)); // top 10
@@ -27,7 +29,7 @@ export default function EndGame({ score, onRestart }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <button onClick={handleSave} disabled={!name}>
+          <button onClick={handleSave} disabled={!name.trim()}>
             Salvar Pontuação
           </button>
         </>

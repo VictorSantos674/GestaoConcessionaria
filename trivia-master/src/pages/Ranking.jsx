@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export default function Ranking({ onBack }) {
@@ -20,6 +19,9 @@ export default function Ranking({ onBack }) {
         <ol>
           {ranking.map(({ name, score }, index) => (
             <li key={index}>
+              {index === 0 && '🥇 '}
+              {index === 1 && '🥈 '}
+              {index === 2 && '🥉 '}
               {name} — {score} pts
             </li>
           ))}
