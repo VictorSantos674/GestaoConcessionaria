@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.DesafioIntelectah.Data;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace src.DesafioIntelectah.Controllers
 {
+    [Authorize(Roles = "Administrador,Gerente,Vendedor")]
     public class VendasController : Controller
     {
         private readonly ApplicationDbContext _context;
