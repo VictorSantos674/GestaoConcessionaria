@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.DesafioIntelectah.Data;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace src.DesafioIntelectah.Controllers
 {
+    [Authorize(Roles = "Administrador,Gerente,Vendedor")]
     public class VeiculosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -33,6 +35,7 @@ namespace src.DesafioIntelectah.Controllers
         }
 
         // GET: Veiculos/Create
+        [Authorize(Roles = "Administrador,Gerente")]
         public IActionResult Create()
         {
             ViewBag.Fabricantes = _context.Fabricantes.ToList();
@@ -40,6 +43,7 @@ namespace src.DesafioIntelectah.Controllers
         }
 
         // POST: Veiculos/Create
+        [Authorize(Roles = "Administrador,Gerente")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Modelo,AnoFabricacao,Preco,TipoVeiculo,Descricao,FabricanteId")] Veiculo veiculo)
@@ -58,6 +62,7 @@ namespace src.DesafioIntelectah.Controllers
         }
 
         // GET: Veiculos/Edit/5
+        [Authorize(Roles = "Administrador,Gerente")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -68,6 +73,7 @@ namespace src.DesafioIntelectah.Controllers
         }
 
         // POST: Veiculos/Edit/5
+        [Authorize(Roles = "Administrador,Gerente")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("VeiculoId,Modelo,AnoFabricacao,Preco,TipoVeiculo,Descricao,FabricanteId")] Veiculo veiculo)
@@ -96,6 +102,7 @@ namespace src.DesafioIntelectah.Controllers
         }
 
         // GET: Veiculos/Delete/5
+        [Authorize(Roles = "Administrador,Gerente")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -105,6 +112,7 @@ namespace src.DesafioIntelectah.Controllers
         }
 
         // POST: Veiculos/Delete/5
+        [Authorize(Roles = "Administrador,Gerente")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
