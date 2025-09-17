@@ -1,0 +1,130 @@
+Caso de Uso 1: Cadastro de Fabricante de Veículos Ator Principal: Administrador
+Objetivo: Permitir que o administrador adicione novos fabricantes de veículos ao sistema.
+Fluxo Principal:
+    1. Início: O administrador faz login no sistema.
+    2. Ação: O administrador navega para a seção de "Fabricantes" e clica em "Adicionar Novo Fabricante".
+    3. Entrada de Dados:
+        ◦ Preenche o nome do fabricante.
+        ◦ Seleciona o país de origem.
+        ◦ Insere o ano de fundação.
+        ◦ Adiciona o URL do website.
+    4. Validação: O sistema valida os campos, garantindo que:
+        ◦ O nome do fabricante seja único e tenha no máximo 100 caracteres.
+        ◦ O ano de fundação seja válido e no passado.
+        ◦ O URL do website seja válido.
+    5. Confirmação: O administrador clica em "Salvar".
+    6. Resultado: O sistema adiciona o fabricante à base de dados e exibe uma mensagem de sucesso.
+Fluxo Alternativo:
+    • Erro de Validação: Se algum campo for inválido, o sistema exibe mensagens de erro específicas e impede o salvamento até que os erros sejam corrigidos.
+
+
+Caso de Uso 2: Cadastro de Veículo Ator Principal: Gerente de Concessionária
+Objetivo: Permitir que o gerente adicione novos veículos ao estoque da concessionária.
+Fluxo Principal:
+    1. Início: O gerente faz login no sistema.
+    2. Ação: O gerente navega para a seção de "Veículos" e clica em "Adicionar Novo Veículo".
+    3. Entrada de Dados:
+o Insere o nome do modelo do veículo.
+        ◦ Seleciona o ano de fabricação.
+        ◦ Define o preço do veículo.
+        ◦ Escolhe o fabricante associado.
+        ◦ Seleciona o tipo de veículo.
+        ◦ Adiciona uma descrição opcional.
+    4. Validação: O sistema verifica que:
+o O nome do modelo tem no máximo 100 caracteres.
+o O ano de fabricação não é no futuro.
+        ◦ O preço é um valor numérico positivo.
+        ◦ Um fabricante foi selecionado.
+    5. Confirmação: O gerente clica em "Salvar".
+    6. Resultado: O veículo é adicionado ao estoque e uma mensagem de confirmação é exibida.
+Fluxo Alternativo:
+    • Erro de Validação: Caso algum dado esteja incorreto, o sistema impede o salvamento e exibe mensagens de erro.
+
+
+Caso de Uso 3: Cadastro de Concessionária Ator Principal: Administrador
+Objetivo: Registrar novas concessionárias no sistema.
+Fluxo Principal:
+    1. Início: O administrador acessa o sistema.
+    2. Ação: O administrador vai para a seção de "Concessionárias" e clica em "Cadastrar Nova Concessionária".
+    3. Entrada de Dados:
+        ◦ Insere o nome da concessionária.
+        ◦ Preenche o endereço completo (rua, cidade, estado, CEP).
+        ◦ Adiciona o telefone e e-mail de contato.
+        ◦ Define a capacidade máxima de veículos.
+    4. Validação: O sistema verifica:
+        ◦ Nome é único e tem até 100 caracteres.
+        ◦ CEP é válido.
+        ◦ Telefone e e-mail estão em formato correto.
+        ◦ Capacidade é um número positivo.
+    5. Confirmação: O administrador salva as informações.
+    6. Resultado: A nova concessionária é cadastrada e uma mensagem de sucesso é exibida.
+Fluxo Alternativo:
+    • Erro de Validação: Se houver problemas nos dados, o sistema notifica o usuário para correção.
+
+
+Caso de Uso 4: Realização de Venda Ator Principal: Vendedor
+Objetivo: Processar a venda de um veículo para um cliente.
+Fluxo Principal:
+    1. Início: O vendedor faz login no sistema.
+    2. Ação: O vendedor acessa a seção de "Vendas" e clica em "Nova Venda".
+    3. Seleção de Veículo:
+o Pesquisa o veículo por modelo ou fabricante.
+        ◦ Seleciona o veículo desejado.
+    4. Seleção de Concessionária:
+        ◦ Pesquisa a concessionária pelo nome ou localização.
+        ◦ Seleciona a concessionária desejada.
+    5. Entrada de Dados do Cliente:
+        ◦ Insere o nome do cliente.
+        ◦ Insere o CPF (com validação de formato e unicidade).
+        ◦ Insere o telefone de contato.
+    6. Definição da Venda:
+        ◦ Seleciona a data da venda.
+        ◦ Define o preço de venda (não superior ao preço do veículo).
+    7. Validação: O sistema valida todos os dados.
+    8. Confirmação: O vendedor clica em "Finalizar Venda".
+    9. Resultado:
+        ◦ A venda é registrada.
+        ◦ Um número de protocolo único é gerado.
+        ◦ Uma mensagem de sucesso é exibida.
+Fluxo Alternativo:
+    • Erro de Validação: Caso algum dado seja inválido, o sistema impede o prosseguimento e notifica o vendedor para corrigir os dados.
+
+
+Caso de Uso 5: Geração de Relatórios Ator Principal: Gerente de Concessionária
+Objetivo: Gerar relatórios de vendas mensais para análise.
+Fluxo Principal:
+    1. Início: O gerente acessa o sistema e faz login.
+    2. Ação: Navega para a seção de "Relatórios" e seleciona "Relatório Mensal de Vendas".
+    3. Definição do Período:
+o Escolhe o mês e ano para o relatório.
+    4. Geração de Relatório:
+        ◦ O sistema processa os dados e gera um relatório com:
+            ▪ Total de vendas.
+            ▪ Vendas por tipo de veículo.
+            ▪ Vendas por fabricante.
+            ▪ Desempenho de cada concessionária.
+    5. Visualização e Exportação:
+        ◦ O gerente visualiza o relatório na tela.
+        ◦ Exporta o relatório para PDF ou Excel, se desejado.
+    6. Resultado:
+        ◦ Relatório gerado e disponível para análise.
+Fluxo Alternativo:
+    • Período Inválido: Se o período for inválido ou não houver dados, o sistema notifica o gerente e não gera o relatório.
+
+
+Caso de Uso 6: Autenticação de Usuários Ator Principal: Todos os Usuários
+Objetivo: Permitir que usuários acessem o sistema com segurança.
+Fluxo Principal:
+    1. Início: O usuário acessa a página de login.
+    2. Entrada de Credenciais:
+        ◦ Insere o nome de usuário e senha.
+    3. Autenticação:
+        ◦ O sistema verifica as credenciais.
+        ◦ Se corretas, o usuário é autenticado.
+    4. Acesso ao Sistema:
+o O usuário é redirecionado para o dashboard conforme o nível de permissão.
+        ◦ Ações e rotas são protegidas conforme o perfil (administrador, vendedor, gerente).
+    5. Resultado:
+o Acesso ao sistema concedido com sucesso.
+Fluxo Alternativo:
+    • Erro de Credenciais: Se as credenciais estiverem incorretas, o sistema exibe uma mensagem de erro.

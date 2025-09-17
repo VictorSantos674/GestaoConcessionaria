@@ -1,0 +1,72 @@
+Desafio Técnico para Desenvolvedores – Intelectah
+
+Objetivo: Desenvolver uma aplicação web para a gestão de concessionárias de veículos utilizando Asp.net MVC e Entity Framework. O sistema deve permitir o gerenciamento de fabricantes de veículos, veículos, concessionárias e a realização de vendas, integrando autenticação de usuários, relatórios e otimização de desempenho.
+
+
+Requisitos do Projeto
+Funcionalidades Básicas (Essencial)
+    1. Autenticação e Autorização de Usuários
+        ◦ Implementar login e registro de usuários com diferentes níveis de acesso (administrador, vendedor, gerente).
+        ◦ Utilizar Identity Framework para gerenciamento de usuários.
+        ◦ Proteger rotas e ações específicas baseadas em permissões.
+    2. Cadastro de Fabricantes de Veículos (CRUD)
+        ◦ Nome do Fabricante: Máximo de 100 caracteres, deve ser único.
+        ◦ País de Origem: Campo de texto livre com no máximo 50 caracteres.
+        ◦ Ano de Fundação: Deve ser um ano válido no passado.
+        ◦ Website: Validação de URL.
+    3. Cadastro de Veículos (CRUD)
+        ◦ Modelo: Nome do modelo, máximo de 100 caracteres.
+        ◦ Ano de Fabricação: Validação para ano não futuro.
+        ◦ Preço: Valor numérico positivo.
+        ◦ Fabricante: Relação obrigatória com o fabricante.
+        ◦ Tipo de Veículo: Enumeração (Carro, Moto, Caminhão etc.).
+        ◦ Descrição: Texto opcional com no máximo 500 caracteres.
+    4. Cadastro de Concessionárias (CRUD)
+        ◦ Nome da Concessionária: Máximo de 100 caracteres, deve ser único.
+        ◦ Endereço Completo: Campos para rua, cidade, estado, e CEP com validação.
+        ◦ Telefone: Validação de formato.
+        ◦ E-mail: Validação de formato.
+        ◦ Capacidade Máxima de Veículos: Valor inteiro positivo.
+    5. Integração com API Externa
+        ◦ Integrar a aplicação com uma API de consulta de dados automotivos, como especificações ou recall.
+        ◦ Implementar chamadas assíncronas para a API utilizando AJAX.
+        ◦ Um exemplo de uso seria API de CEP para o endereço.
+    6. Realização de Vendas
+        ◦ Seleção de Concessionária: Pesquisa por nome ou localização.
+        ◦ Seleção de Fabricante: Pesquisa por nome.
+        ◦ Seleção de Veículo: Pesquisa por modelo. (O carregamento dos valores deste campo é condicionado à seleção do valor do campo Fabricante. Utilize Ajax).
+        ◦ Dados do Cliente: Nome, CPF (com validação e unicidade), e telefone.
+        ◦ Data da Venda: Não pode ser futura.
+        ◦ Preço de Venda: Deve ser menor ou igual ao preço do veículo.
+        ◦ Geração de Número de Protocolo Único para a Venda.
+Atenção: a deleção de registro dos CRUDs acima deve ser lógica.
+
+
+Funcionalidades Avançadas (Opcional)
+    1. Relatórios e Dashboards
+        ◦ Criar relatórios mensais de vendas realizadas, categorizados por tipo de veículo, concessionária e fabricante.
+        ◦ Dashboard inicial com gráficos sobre o desempenho de vendas, utilizando uma biblioteca de gráficos (ex: Chart.js).
+        ◦ Exportar relatórios para PDF ou Excel.
+    2. Otimização de Desempenho
+        ◦ Implementar caching para consultas frequentes utilizando Redis ou Memcached.
+        ◦ Melhorar o tempo de carregamento com lazy loading de imagens e recursos estáticos.
+        ◦ Analisar e otimizar consultas SQL para desempenho.
+    3. Teste e Documentação
+        ◦ Criar testes unitários e de integração para as principais funcionalidades.
+        ◦ Documentar a API e endpoints com Swagger.
+        ◦ Produzir documentação técnica do projeto explicando a arquitetura e decisões tomadas.
+
+Tecnologias Utilizadas
+    • Frontend: Bootstrap, JavaScript (AJAX), HTML/CSS.
+    • Backend: ASP.NET MVC, Entity Framework.
+    • Banco de Dados: LocalDB ou SQL Server.
+    • Autenticação: Identity Framework.
+    • Caching: Redis ou Memcached.
+    • Relatórios: Chart.js ou similar.
+    • Documentação: Swagger para API, Markdown para documentação técnica.
+
+
+Entrega
+        ◦ O código deve ser publicado em um repositório GitHub público. (Essencial)
+        ◦ Incluir instruções claras de como configurar e executar o projeto. (Opcional)
+        ◦ Fornecer um vídeo ou demonstração do projeto em funcionamento. (Opcional)

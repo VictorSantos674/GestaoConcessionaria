@@ -1,0 +1,35 @@
+Modelagem de Dados
+    1. Tabela Fabricantes
+        ◦ Descrição: Armazena informações sobre os fabricantes de veículos.
+        ◦ Colunas:
+            ▪ FabricanteID: INT (PK, Auto Increment) - Identificador único do fabricante.
+            ▪ Nome: VARCHAR(100) - Nome do fabricante (deve ser único).
+            ▪ PaísOrigem: VARCHAR(50) - País de origem do fabricante.
+            ▪ AnoFundacao: INT - Ano de fundação do fabricante.
+            ▪ Website: VARCHAR(255) - URL do site do fabricante.
+    2. Tabela Veiculos
+        ◦ Descrição: Armazena detalhes dos veículos disponíveis.
+        ◦ Colunas:
+            ▪ VeiculoID: INT (PK, Auto Increment) - Identificador único do veículo.
+            ▪ Modelo: VARCHAR(100) - Nome do modelo do veículo.
+            ▪ AnoFabricacao: INT - Ano de fabricação do veículo.
+            ▪ Preco: DECIMAL(10, 2) - Preço do veículo.
+            ▪ FabricanteID: INT (FK) - Referência para o fabricante do veículo.
+            ▪ TipoVeiculo: ENUM('Carro', 'Moto', 'Caminhão', etc.) - Tipo de veículo.
+            ▪ Descricao: TEXT - Descrição opcional do veículo.
+        ◦ Relacionamentos:
+            ▪ FabricanteID é uma chave estrangeira que referencia FabricanteID em Fabricantes.
+    3. Tabela Concessionarias
+        ◦ Descrição: Contém informações sobre as concessionárias.
+        ◦ Colunas:
+            ▪ ConcessionariaID: INT (PK, Auto Increment) - Identificador único da concessionária.
+            ▪ Nome: VARCHAR(100) - Nome da concessionária (deve ser único).
+            ▪ Endereco: VARCHAR(255) - Endereço completo da concessionária.
+            ▪ Cidade: VARCHAR(50) - Cidade onde a concessionária está localizada.
+            ▪ Estado: VARCHAR(50) - Estado onde a concessionária está localizada.
+            ▪ CEP: VARCHAR(10) - CEP da concessionária.
+            ▪ Telefone: VARCHAR(15) - Telefone de contato.
+            ▪ Email: VARCHAR(100) - Email de contato.
+            ▪ CapacidadeMaximaVeiculos: INT - Capacidade máxima de veículos que a concessionária pode armazenar.
+    4. Tabela Clientes
+        ◦ Descrição: Armazena informações sobre os clientes que realizam compras.
