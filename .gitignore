@@ -1,0 +1,30 @@
+Arquivos de configuração de usuário específicos do Visual Studio e do sistema operacional
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+Arquivos de compilação e saídas do build
+/bin/
+/obj/
+/release/
+/debug/
+
+Arquivos de cache e temporários
+/TestResults/
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.opensdf
+*.sdf
+*.cache
+*.vssettings
+
+Arquivos de configuração local que podem conter segredos
+appsettings.Development.json
+
+Arquivos do Rider
+.idea/
+*.sln.iml
