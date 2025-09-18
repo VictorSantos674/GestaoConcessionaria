@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using src.DesafioIntelectah.Data;
-using src.DesafioIntelectah.Models;
+using DesafioIntelectah.Data;
+using DesafioIntelectah.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace src.DesafioIntelectah.Controllers
+namespace DesafioIntelectah.Controllers
 {
     [Authorize(Roles = "Administrador")]
     public class ConcessionariasController : Controller
@@ -28,7 +28,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-            var concessionaria = await _context.Concessionarias.FirstOrDefaultAsync(c => c.ConcessionariaId == id);
+            var concessionaria = await _context.Concessionarias.FirstOrDefaultAsync(c => c.ConcessionariaID == id);
             if (concessionaria == null) return NotFound();
             return View(concessionaria);
         }
@@ -42,7 +42,7 @@ namespace src.DesafioIntelectah.Controllers
         // POST: Concessionarias/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Endereco,Cidade,Estado,Cep,Telefone,Email,CapacidadeMaximaVeiculos")] Concessionaria concessionaria)
+    public async Task<IActionResult> Create([Bind("Nome,Endereco,Cidade,Estado,CEP,Telefone,Email,CapacidadeMaximaVeiculos")] Concessionaria concessionaria)
         {
             if (ModelState.IsValid)
             {
@@ -72,13 +72,13 @@ namespace src.DesafioIntelectah.Controllers
         // POST: Concessionarias/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConcessionariaId,Nome,Endereco,Cidade,Estado,Cep,Telefone,Email,CapacidadeMaximaVeiculos")] Concessionaria concessionaria)
+    public async Task<IActionResult> Edit(int id, [Bind("ConcessionariaID,Nome,Endereco,Cidade,Estado,CEP,Telefone,Email,CapacidadeMaximaVeiculos")] Concessionaria concessionaria)
         {
-            if (id != concessionaria.ConcessionariaId) return NotFound();
+            if (id != concessionaria.ConcessionariaID) return NotFound();
             if (ModelState.IsValid)
             {
                 // Validação de unicidade (exceto o próprio)
-                if (await _context.Concessionarias.AnyAsync(c => c.Nome == concessionaria.Nome && c.ConcessionariaId != concessionaria.ConcessionariaId))
+                if (await _context.Concessionarias.AnyAsync(c => c.Nome == concessionaria.Nome && c.ConcessionariaID != concessionaria.ConcessionariaID))
                 {
                     ModelState.AddModelError("Nome", "Já existe uma concessionária com este nome.");
                     return View(concessionaria);
@@ -91,7 +91,7 @@ namespace src.DesafioIntelectah.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConcessionariaExists(concessionaria.ConcessionariaId))
+                    if (!ConcessionariaExists(concessionaria.ConcessionariaID))
                         return NotFound();
                     else throw;
                 }
@@ -104,7 +104,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var concessionaria = await _context.Concessionarias.FirstOrDefaultAsync(c => c.ConcessionariaId == id);
+            var concessionaria = await _context.Concessionarias.FirstOrDefaultAsync(c => c.ConcessionariaID == id);
             if (concessionaria == null) return NotFound();
             return View(concessionaria);
         }
@@ -125,7 +125,7 @@ namespace src.DesafioIntelectah.Controllers
 
         private bool ConcessionariaExists(int id)
         {
-            return _context.Concessionarias.Any(e => e.ConcessionariaId == id);
+            return _context.Concessionarias.Any(e => e.ConcessionariaID == id);
         }
     }
 }

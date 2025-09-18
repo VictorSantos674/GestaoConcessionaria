@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using src.DesafioIntelectah.Data;
-using src.DesafioIntelectah.Models;
+using DesafioIntelectah.Data;
+using DesafioIntelectah.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace src.DesafioIntelectah.Controllers
+namespace DesafioIntelectah.Controllers
 {
     [Authorize(Roles = "Administrador,Gerente")]
     public class ClientesController : Controller
@@ -28,7 +28,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteId == id);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteID == id);
             if (cliente == null) return NotFound();
             return View(cliente);
         }
@@ -72,13 +72,13 @@ namespace src.DesafioIntelectah.Controllers
         // POST: Clientes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,CPF,Telefone")] Cliente cliente)
+    public async Task<IActionResult> Edit(int id, [Bind("ClienteID,Nome,CPF,Telefone")] Cliente cliente)
         {
-            if (id != cliente.ClienteId) return NotFound();
+            if (id != cliente.ClienteID) return NotFound();
             if (ModelState.IsValid)
             {
                 // Validação de unicidade de CPF (exceto o próprio)
-                if (await _context.Clientes.AnyAsync(c => c.CPF == cliente.CPF && c.ClienteId != cliente.ClienteId))
+                if (await _context.Clientes.AnyAsync(c => c.CPF == cliente.CPF && c.ClienteID != cliente.ClienteID))
                 {
                     ModelState.AddModelError("CPF", "Já existe um cliente com este CPF.");
                     return View(cliente);
@@ -91,7 +91,7 @@ namespace src.DesafioIntelectah.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.ClienteId))
+                    if (!ClienteExists(cliente.ClienteID))
                         return NotFound();
                     else throw;
                 }
@@ -104,7 +104,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteId == id);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteID == id);
             if (cliente == null) return NotFound();
             return View(cliente);
         }
@@ -125,7 +125,7 @@ namespace src.DesafioIntelectah.Controllers
 
         private bool ClienteExists(int id)
         {
-            return _context.Clientes.Any(e => e.ClienteId == id);
+            return _context.Clientes.Any(e => e.ClienteID == id);
         }
     }
 }

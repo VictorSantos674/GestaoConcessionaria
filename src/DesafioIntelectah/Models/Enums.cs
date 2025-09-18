@@ -1,13 +1,16 @@
-public enum TipoVeiculo
+namespace DesafioIntelectah.Models
 {
-    Carro,
-    Moto,
-    Caminhao
-}
+    public enum TipoVeiculo
+    {
+        Carro,
+        Moto,
+        Caminhao
+    }
 
-public enum NivelAcesso
-{
-    Administrador,
-    Vendedor,
-    Gerente
+    public enum NivelAcesso
+    {
+        Administrador,
+        Vendedor,
+        Gerente
+    }
 }

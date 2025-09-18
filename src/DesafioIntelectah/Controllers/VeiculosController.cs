@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using src.DesafioIntelectah.Data;
-using src.DesafioIntelectah.Models;
+using DesafioIntelectah.Data;
+using DesafioIntelectah.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace src.DesafioIntelectah.Controllers
+namespace DesafioIntelectah.Controllers
 {
     [Authorize(Roles = "Administrador,Gerente,Vendedor")]
     public class VeiculosController : Controller
@@ -21,11 +21,11 @@ namespace src.DesafioIntelectah.Controllers
         // GET: Veiculos/PorFabricante/5 (AJAX)
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> PorFabricante(int fabricanteId)
+    public async Task<IActionResult> PorFabricante(int fabricanteID)
         {
             var veiculos = await _context.Veiculos
-                .Where(v => v.FabricanteId == fabricanteId && !v.IsDeleted)
-                .Select(v => new { v.VeiculoId, v.Modelo })
+                .Where(v => v.FabricanteID == fabricanteID && !v.IsDeleted)
+                .Select(v => new { v.VeiculoID, v.Modelo })
                 .OrderBy(v => v.Modelo)
                 .ToListAsync();
             return Json(veiculos);
@@ -42,7 +42,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-            var veiculo = await _context.Veiculos.Include(v => v.Fabricante).FirstOrDefaultAsync(v => v.VeiculoId == id);
+        var veiculo = await _context.Veiculos.Include(v => v.Fabricante).FirstOrDefaultAsync(v => v.VeiculoID == id);
             if (veiculo == null) return NotFound();
             return View(veiculo);
         }
@@ -51,7 +51,7 @@ namespace src.DesafioIntelectah.Controllers
         [Authorize(Roles = "Administrador,Gerente")]
         public IActionResult Create()
         {
-            ViewBag.Fabricantes = _context.Fabricantes.ToList();
+            ViewBag.Fabricantes = _context.Fabricantes.AsNoTracking().ToList();
             return View();
         }
 
@@ -59,10 +59,10 @@ namespace src.DesafioIntelectah.Controllers
         [Authorize(Roles = "Administrador,Gerente")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Modelo,AnoFabricacao,Preco,TipoVeiculo,Descricao,FabricanteId")] Veiculo veiculo)
+    public async Task<IActionResult> Create([Bind("Modelo,AnoFabricacao,Preco,TipoVeiculo,Descricao,FabricanteID")] Veiculo veiculo)
         {
-            if (!_context.Fabricantes.Any(f => f.FabricanteId == veiculo.FabricanteId))
-                ModelState.AddModelError("FabricanteId", "Selecione um fabricante válido.");
+            if (!_context.Fabricantes.Any(f => f.FabricanteID == veiculo.FabricanteID))
+                ModelState.AddModelError("FabricanteID", "Selecione um fabricante válido.");
             if (ModelState.IsValid)
             {
                 _context.Add(veiculo);
@@ -70,7 +70,7 @@ namespace src.DesafioIntelectah.Controllers
                 TempData["Success"] = "Veículo cadastrado com sucesso!";
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Fabricantes = _context.Fabricantes.ToList();
+            ViewBag.Fabricantes = _context.Fabricantes.AsNoTracking().ToList();
             return View(veiculo);
         }
 
@@ -81,7 +81,7 @@ namespace src.DesafioIntelectah.Controllers
             if (id == null) return NotFound();
             var veiculo = await _context.Veiculos.FindAsync(id);
             if (veiculo == null) return NotFound();
-            ViewBag.Fabricantes = _context.Fabricantes.ToList();
+            ViewBag.Fabricantes = _context.Fabricantes.AsNoTracking().ToList();
             return View(veiculo);
         }
 
@@ -89,11 +89,11 @@ namespace src.DesafioIntelectah.Controllers
         [Authorize(Roles = "Administrador,Gerente")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VeiculoId,Modelo,AnoFabricacao,Preco,TipoVeiculo,Descricao,FabricanteId")] Veiculo veiculo)
+    public async Task<IActionResult> Edit(int id, [Bind("VeiculoID,Modelo,AnoFabricacao,Preco,TipoVeiculo,Descricao,FabricanteID")] Veiculo veiculo)
         {
-            if (id != veiculo.VeiculoId) return NotFound();
-            if (!_context.Fabricantes.Any(f => f.FabricanteId == veiculo.FabricanteId))
-                ModelState.AddModelError("FabricanteId", "Selecione um fabricante válido.");
+            if (id != veiculo.VeiculoID) return NotFound();
+            if (!_context.Fabricantes.Any(f => f.FabricanteID == veiculo.FabricanteID))
+                ModelState.AddModelError("FabricanteID", "Selecione um fabricante válido.");
             if (ModelState.IsValid)
             {
                 try
@@ -104,13 +104,13 @@ namespace src.DesafioIntelectah.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VeiculoExists(veiculo.VeiculoId))
+                    if (!VeiculoExists(veiculo.VeiculoID))
                         return NotFound();
                     else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Fabricantes = _context.Fabricantes.ToList();
+            ViewBag.Fabricantes = _context.Fabricantes.AsNoTracking().ToList();
             return View(veiculo);
         }
 
@@ -119,7 +119,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var veiculo = await _context.Veiculos.Include(v => v.Fabricante).FirstOrDefaultAsync(v => v.VeiculoId == id);
+        var veiculo = await _context.Veiculos.Include(v => v.Fabricante).FirstOrDefaultAsync(v => v.VeiculoID == id);
             if (veiculo == null) return NotFound();
             return View(veiculo);
         }
@@ -141,7 +141,7 @@ namespace src.DesafioIntelectah.Controllers
 
         private bool VeiculoExists(int id)
         {
-            return _context.Veiculos.Any(e => e.VeiculoId == id);
+            return _context.Veiculos.Any(e => e.VeiculoID == id);
         }
     }
 }

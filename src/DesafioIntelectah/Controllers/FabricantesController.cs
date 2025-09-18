@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using src.DesafioIntelectah.Data;
-using src.DesafioIntelectah.Models;
+using DesafioIntelectah.Data;
+using DesafioIntelectah.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace src.DesafioIntelectah.Controllers
+namespace DesafioIntelectah.Controllers
 {
     [Authorize(Roles = "Administrador")]
     public class FabricantesController : Controller
@@ -28,7 +28,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-            var fabricante = await _context.Fabricantes.FirstOrDefaultAsync(f => f.FabricanteId == id);
+                var fabricante = await _context.Fabricantes.FirstOrDefaultAsync(f => f.FabricanteID == id);
             if (fabricante == null) return NotFound();
             return View(fabricante);
         }
@@ -72,13 +72,13 @@ namespace src.DesafioIntelectah.Controllers
         // POST: Fabricantes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FabricanteId,Nome,PaisOrigem,AnoFundacao,Website")] Fabricante fabricante)
+    public async Task<IActionResult> Edit(int id, [Bind("FabricanteID,Nome,PaisOrigem,AnoFundacao,Website")] Fabricante fabricante)
         {
-            if (id != fabricante.FabricanteId) return NotFound();
+            if (id != fabricante.FabricanteID) return NotFound();
             if (ModelState.IsValid)
             {
                 // Validação de unicidade (exceto o próprio)
-                if (await _context.Fabricantes.AnyAsync(f => f.Nome == fabricante.Nome && f.FabricanteId != fabricante.FabricanteId))
+                if (await _context.Fabricantes.AnyAsync(f => f.Nome == fabricante.Nome && f.FabricanteID != fabricante.FabricanteID))
                 {
                     ModelState.AddModelError("Nome", "Já existe um fabricante com este nome.");
                     return View(fabricante);
@@ -91,7 +91,7 @@ namespace src.DesafioIntelectah.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FabricanteExists(fabricante.FabricanteId))
+                    if (!FabricanteExists(fabricante.FabricanteID))
                         return NotFound();
                     else throw;
                 }
@@ -104,7 +104,7 @@ namespace src.DesafioIntelectah.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var fabricante = await _context.Fabricantes.FirstOrDefaultAsync(f => f.FabricanteId == id);
+                var fabricante = await _context.Fabricantes.FirstOrDefaultAsync(f => f.FabricanteID == id);
             if (fabricante == null) return NotFound();
             return View(fabricante);
         }
@@ -125,7 +125,7 @@ namespace src.DesafioIntelectah.Controllers
 
         private bool FabricanteExists(int id)
         {
-            return _context.Fabricantes.Any(e => e.FabricanteId == id);
+            return _context.Fabricantes.Any(e => e.FabricanteID == id);
         }
     }
 }

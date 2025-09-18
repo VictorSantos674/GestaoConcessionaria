@@ -1,4 +1,4 @@
-@model src.DesafioIntelectah.ViewModels.RelatorioVendasViewModel
+@model DesafioIntelectah.ViewModels.RelatorioVendasViewModel
 @{
     ViewBag.Title = $"Relatório Mensal de Vendas - {@Model.Mes:D2}/{@Model.Ano}";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,7 +26,9 @@
             }
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Filtrar</button>
+    <button type="submit" class="btn btn-primary mr-2">Filtrar</button>
+    <a href="@Url.Action("RelatorioMensalExcel", "Exportacao", new { ano = Model.Ano, mes = Model.Mes })" class="btn btn-success mr-2" target="_blank">Exportar Excel</a>
+    <a href="@Url.Action("RelatorioMensalPDF", "Exportacao", new { ano = Model.Ano, mes = Model.Mes })" class="btn btn-danger" target="_blank">Exportar PDF</a>
 </form>
 
 <div class="row mb-4">
