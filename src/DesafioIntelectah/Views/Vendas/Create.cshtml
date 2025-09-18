@@ -1,0 +1,117 @@
+@model DesafioIntelectah.ViewModels.VendaViewModel
+
+@{
+    ViewBag.Title = "Registrar Venda";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2" for="FabricanteID">Fabricante</label>
+            <div class="col-md-10">
+                <select id="FabricanteID" name="FabricanteID" class="form-control">
+                    <option value="">Selecione</option>
+                    @if (ViewBag.Fabricantes != null)
+                    {
+                        foreach (var fab in ViewBag.Fabricantes)
+                        {
+                            <option value="@fab.FabricanteId">@fab.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.VeiculoID, "Veículo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="VeiculoID" name="VeiculoID" class="form-control">
+                    <option value="">Selecione</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.VeiculoID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConcessionariaID, "Concessionária", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConcessionariaID", null, "Selecione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConcessionariaID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ClienteNome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ClienteNome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClienteNome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ClienteCPF, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ClienteCPF, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClienteCPF, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ClienteTelefone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ClienteTelefone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClienteTelefone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DataVenda, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.DataVenda, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.DataVenda, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PrecoVenda, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PrecoVenda, new { @class = "form-control", type = "number", step = "0.01", min = "0" })
+                @Html.ValidationMessageFor(m => m.PrecoVenda, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Finalizar Venda" class="btn btn-primary" />
+                <a href="@Url.Action("Index")" class="btn btn-default">Voltar</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $('#FabricanteID').change(function () {
+                var fabricanteId = $(this).val();
+                var $veiculo = $('#VeiculoID');
+                $veiculo.empty().append($('<option>', { value: '', text: 'Selecione' }));
+                if (fabricanteId) {
+                    $.getJSON('/Veiculos/PorFabricante/' + fabricanteId, function (data) {
+                        $.each(data, function (i, v) {
+                            $veiculo.append($('<option>', { value: v.veiculoId, text: v.modelo }));
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}

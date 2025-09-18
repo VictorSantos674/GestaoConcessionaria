@@ -17,6 +17,19 @@ namespace src.DesafioIntelectah.Controllers
         {
             _context = context;
         }
+    
+        // GET: Veiculos/PorFabricante/5 (AJAX)
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> PorFabricante(int fabricanteId)
+        {
+            var veiculos = await _context.Veiculos
+                .Where(v => v.FabricanteId == fabricanteId && !v.IsDeleted)
+                .Select(v => new { v.VeiculoId, v.Modelo })
+                .OrderBy(v => v.Modelo)
+                .ToListAsync();
+            return Json(veiculos);
+        }
 
         // GET: Veiculos
         public async Task<IActionResult> Index()
