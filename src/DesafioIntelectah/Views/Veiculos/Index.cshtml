@@ -1,0 +1,41 @@
+@model IEnumerable<DesafioIntelectah.Models.Veiculo>
+
+@{
+    ViewBag.Title = "Lista de Veículos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Novo Veículo</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Modelo)</th>
+            <th>@Html.DisplayNameFor(m => m.AnoFabricacao)</th>
+            <th>@Html.DisplayNameFor(m => m.Preco)</th>
+            <th>@Html.DisplayNameFor(m => m.Fabricante.Nome)</th>
+            <th>@Html.DisplayNameFor(m => m.TipoVeiculo)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.Modelo)</td>
+            <td>@Html.DisplayFor(m => item.AnoFabricacao)</td>
+            <td>@Html.DisplayFor(m => item.Preco)</td>
+            <td>@Html.DisplayFor(m => item.Fabricante.Nome)</td>
+            <td>@Html.DisplayFor(m => item.TipoVeiculo)</td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.VeiculoID })" class="btn btn-primary btn-sm">Editar</a>
+                <a href="@Url.Action("Details", new { id = item.VeiculoID })" class="btn btn-info btn-sm">Detalhes</a>
+                <a href="@Url.Action("Delete", new { id = item.VeiculoID })" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+@model IEnumerable<DesafioIntelectah.Models.Fabricante>
+
+@{
+	ViewBag.Title = "Lista de Fabricantes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+	<a href="@Url.Action("Create")" class="btn btn-success">Novo Fabricante</a>
+</p>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>@Html.DisplayNameFor(m => m.Nome)</th>
+			<th>@Html.DisplayNameFor(m => m.PaisOrigem)</th>
+			<th>@Html.DisplayNameFor(m => m.AnoFundacao)</th>
+			<th>@Html.DisplayNameFor(m => m.Website)</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>@Html.DisplayFor(m => item.Nome)</td>
+			<td>@Html.DisplayFor(m => item.PaisOrigem)</td>
+			<td>@Html.DisplayFor(m => item.AnoFundacao)</td>
+			<td>@Html.DisplayFor(m => item.Website)</td>
+			<td>
+				<a href="@Url.Action("Edit", new { id = item.FabricanteID })" class="btn btn-primary btn-sm">Editar</a>
+				<a href="@Url.Action("Details", new { id = item.FabricanteID })" class="btn btn-info btn-sm">Detalhes</a>
+				<a href="@Url.Action("Delete", new { id = item.FabricanteID })" class="btn btn-danger btn-sm">Excluir</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>

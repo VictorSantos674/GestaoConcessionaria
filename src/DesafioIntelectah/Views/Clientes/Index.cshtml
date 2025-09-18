@@ -1,0 +1,37 @@
+@model IEnumerable<DesafioIntelectah.Models.Cliente>
+
+@{
+    ViewBag.Title = "Lista de Clientes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Novo Cliente</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Nome)</th>
+            <th>@Html.DisplayNameFor(m => m.CPF)</th>
+            <th>@Html.DisplayNameFor(m => m.Telefone)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.Nome)</td>
+            <td>@Html.DisplayFor(m => item.CPF)</td>
+            <td>@Html.DisplayFor(m => item.Telefone)</td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.ClienteID })" class="btn btn-primary btn-sm">Editar</a>
+                <a href="@Url.Action("Details", new { id = item.ClienteID })" class="btn btn-info btn-sm">Detalhes</a>
+                <a href="@Url.Action("Delete", new { id = item.ClienteID })" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,47 @@
+@model DesafioIntelectah.Models.Concessionaria
+
+@{
+    ViewBag.Title = "Excluir Concessionária";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Tem certeza que deseja excluir esta concessionária?</h3>
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.Nome)</dt>
+        <dd>@Html.DisplayFor(m => m.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Endereco)</dt>
+        <dd>@Html.DisplayFor(m => m.Endereco)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Cidade)</dt>
+        <dd>@Html.DisplayFor(m => m.Cidade)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Estado)</dt>
+        <dd>@Html.DisplayFor(m => m.Estado)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.CEP)</dt>
+        <dd>@Html.DisplayFor(m => m.CEP)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Telefone)</dt>
+        <dd>@Html.DisplayFor(m => m.Telefone)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Email)</dt>
+        <dd>@Html.DisplayFor(m => m.Email)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.CapacidadeMaximaVeiculos)</dt>
+        <dd>@Html.DisplayFor(m => m.CapacidadeMaximaVeiculos)</dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.ConcessionariaID" />
+    <div class="form-group">
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancelar</a>
+    </div>
+}

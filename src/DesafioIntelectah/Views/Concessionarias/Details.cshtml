@@ -1,0 +1,41 @@
+@model DesafioIntelectah.Models.Concessionaria
+
+@{
+    ViewBag.Title = "Detalhes da Concessionária";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.Nome)</dt>
+        <dd>@Html.DisplayFor(m => m.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Endereco)</dt>
+        <dd>@Html.DisplayFor(m => m.Endereco)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Cidade)</dt>
+        <dd>@Html.DisplayFor(m => m.Cidade)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Estado)</dt>
+        <dd>@Html.DisplayFor(m => m.Estado)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.CEP)</dt>
+        <dd>@Html.DisplayFor(m => m.CEP)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Telefone)</dt>
+        <dd>@Html.DisplayFor(m => m.Telefone)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Email)</dt>
+        <dd>@Html.DisplayFor(m => m.Email)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.CapacidadeMaximaVeiculos)</dt>
+        <dd>@Html.DisplayFor(m => m.CapacidadeMaximaVeiculos)</dd>
+    </dl>
+</div>
+
+<div>
+    <a href="@Url.Action("Edit", new { id = Model.ConcessionariaID })" class="btn btn-primary">Editar</a>
+    <a href="@Url.Action("Index")" class="btn btn-default">Voltar</a>
+</div>

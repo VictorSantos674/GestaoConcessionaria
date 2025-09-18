@@ -1,0 +1,35 @@
+@model DesafioIntelectah.Models.Veiculo
+
+@{
+    ViewBag.Title = "Detalhes do Veículo";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.Modelo)</dt>
+        <dd>@Html.DisplayFor(m => m.Modelo)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.AnoFabricacao)</dt>
+        <dd>@Html.DisplayFor(m => m.AnoFabricacao)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Preco)</dt>
+        <dd>@Html.DisplayFor(m => m.Preco)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Fabricante.Nome)</dt>
+        <dd>@Html.DisplayFor(m => m.Fabricante.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.TipoVeiculo)</dt>
+        <dd>@Html.DisplayFor(m => m.TipoVeiculo)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Descricao)</dt>
+        <dd>@Html.DisplayFor(m => m.Descricao)</dd>
+    </dl>
+</div>
+
+<div>
+    <a href="@Url.Action("Edit", new { id = Model.VeiculoID })" class="btn btn-primary">Editar</a>
+    <a href="@Url.Action("Index")" class="btn btn-default">Voltar</a>
+</div>

@@ -1,0 +1,45 @@
+@model IEnumerable<DesafioIntelectah.Models.Concessionaria>
+
+@{
+    ViewBag.Title = "Lista de Concessionárias";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Nova Concessionária</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Nome)</th>
+            <th>@Html.DisplayNameFor(m => m.Cidade)</th>
+            <th>@Html.DisplayNameFor(m => m.Estado)</th>
+            <th>@Html.DisplayNameFor(m => m.CEP)</th>
+            <th>@Html.DisplayNameFor(m => m.Telefone)</th>
+            <th>@Html.DisplayNameFor(m => m.Email)</th>
+            <th>@Html.DisplayNameFor(m => m.CapacidadeMaximaVeiculos)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.Nome)</td>
+            <td>@Html.DisplayFor(m => item.Cidade)</td>
+            <td>@Html.DisplayFor(m => item.Estado)</td>
+            <td>@Html.DisplayFor(m => item.CEP)</td>
+            <td>@Html.DisplayFor(m => item.Telefone)</td>
+            <td>@Html.DisplayFor(m => item.Email)</td>
+            <td>@Html.DisplayFor(m => item.CapacidadeMaximaVeiculos)</td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.ConcessionariaID })" class="btn btn-primary btn-sm">Editar</a>
+                <a href="@Url.Action("Details", new { id = item.ConcessionariaID })" class="btn btn-info btn-sm">Detalhes</a>
+                <a href="@Url.Action("Delete", new { id = item.ConcessionariaID })" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+@model DesafioIntelectah.Models.Veiculo
+
+@{
+    ViewBag.Title = "Excluir Veículo";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Tem certeza que deseja excluir este veículo?</h3>
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.Modelo)</dt>
+        <dd>@Html.DisplayFor(m => m.Modelo)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.AnoFabricacao)</dt>
+        <dd>@Html.DisplayFor(m => m.AnoFabricacao)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Preco)</dt>
+        <dd>@Html.DisplayFor(m => m.Preco)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Fabricante.Nome)</dt>
+        <dd>@Html.DisplayFor(m => m.Fabricante.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.TipoVeiculo)</dt>
+        <dd>@Html.DisplayFor(m => m.TipoVeiculo)</dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.VeiculoID" />
+    <div class="form-group">
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancelar</a>
+    </div>
+}
