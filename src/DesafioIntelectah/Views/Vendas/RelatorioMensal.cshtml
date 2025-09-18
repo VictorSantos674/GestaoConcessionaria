@@ -1,0 +1,170 @@
+@model src.DesafioIntelectah.ViewModels.RelatorioVendasViewModel
+@{
+    ViewBag.Title = $"Relatório Mensal de Vendas - {@Model.Mes:D2}/{@Model.Ano}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<form method="get" class="form-inline mb-4">
+    <div class="form-group mr-2">
+        <label for="mes">Mês:</label>
+        <select name="mes" id="mes" class="form-control mx-2">
+            @for (int m = 1; m <= 12; m++)
+            {
+                <option value="@m" @(m == Model.Mes ? "selected" : "")>@m.ToString("D2")</option>
+            }
+        </select>
+    </div>
+    <div class="form-group mr-2">
+        <label for="ano">Ano:</label>
+        <select name="ano" id="ano" class="form-control mx-2">
+            @for (int a = DateTime.Now.Year; a >= DateTime.Now.Year - 10; a--)
+            {
+                <option value="@a" @(a == Model.Ano ? "selected" : "")>@a</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Total de Vendas</div>
+            <div class="card-body">
+                <h4 class="card-title">@Model.TotalVendas</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Faturamento Total</div>
+            <div class="card-body">
+                <h4 class="card-title">@Model.TotalFaturado.ToString("C")</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Vendas por Tipo de Veículo</h4>
+        <canvas id="chartTipo"></canvas>
+    </div>
+    <div class="col-md-6">
+        <h4>Vendas por Fabricante</h4>
+        <canvas id="chartFabricante"></canvas>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h4>Vendas por Concessionária</h4>
+        <canvas id="chartConcessionaria"></canvas>
+    </div>
+</div>
+
+<hr />
+<h4>Detalhamento</h4>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Tipo de Veículo</th>
+            <th>Quantidade</th>
+            <th>Faturamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tipo in Model.VendasPorTipo)
+        {
+            <tr>
+                <td>@tipo.TipoVeiculo</td>
+                <td>@tipo.Quantidade</td>
+                <td>@tipo.Faturamento.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Fabricante</th>
+            <th>Quantidade</th>
+            <th>Faturamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fab in Model.VendasPorFabricante)
+        {
+            <tr>
+                <td>@fab.Fabricante</td>
+                <td>@fab.Quantidade</td>
+                <td>@fab.Faturamento.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Concessionária</th>
+            <th>Quantidade</th>
+            <th>Faturamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var conc in Model.VendasPorConcessionaria)
+        {
+            <tr>
+                <td>@conc.Concessionaria</td>
+                <td>@conc.Quantidade</td>
+                <td>@conc.Faturamento.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Gráfico por Tipo de Veículo
+        var ctxTipo = document.getElementById('chartTipo').getContext('2d');
+        var chartTipo = new Chart(ctxTipo, {
+            type: 'pie',
+            data: {
+                labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.VendasPorTipo.Select(x => x.TipoVeiculo))),
+                datasets: [{
+                    data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.VendasPorTipo.Select(x => x.Quantidade))),
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6c757d', '#17a2b8']
+                }]
+            }
+        });
+        // Gráfico por Fabricante
+        var ctxFab = document.getElementById('chartFabricante').getContext('2d');
+        var chartFab = new Chart(ctxFab, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.VendasPorFabricante.Select(x => x.Fabricante))),
+                datasets: [{
+                    label: 'Quantidade',
+                    data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.VendasPorFabricante.Select(x => x.Quantidade))),
+                    backgroundColor: '#007bff'
+                }]
+            }
+        });
+        // Gráfico por Concessionária
+        var ctxConc = document.getElementById('chartConcessionaria').getContext('2d');
+        var chartConc = new Chart(ctxConc, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.VendasPorConcessionaria.Select(x => x.Concessionaria))),
+                datasets: [{
+                    label: 'Quantidade',
+                    data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.VendasPorConcessionaria.Select(x => x.Quantidade))),
+                    backgroundColor: '#28a745'
+                }]
+            }
+        });
+    </script>
+}
