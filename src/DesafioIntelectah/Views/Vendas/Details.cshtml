@@ -1,0 +1,41 @@
+@model DesafioIntelectah.ViewModels.VendaViewModel
+
+@{
+    ViewBag.Title = "Detalhes da Venda";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.VeiculoNome)</dt>
+        <dd>@Html.DisplayFor(m => m.VeiculoNome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.ConcessionariaNome)</dt>
+        <dd>@Html.DisplayFor(m => m.ConcessionariaNome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.ClienteNome)</dt>
+        <dd>@Html.DisplayFor(m => m.ClienteNome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.ClienteCPF)</dt>
+        <dd>@Html.DisplayFor(m => m.ClienteCPF)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.ClienteTelefone)</dt>
+        <dd>@Html.DisplayFor(m => m.ClienteTelefone)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.DataVenda)</dt>
+        <dd>@Html.DisplayFor(m => m.DataVenda)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.PrecoVenda)</dt>
+        <dd>@Html.DisplayFor(m => m.PrecoVenda)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Protocolo)</dt>
+        <dd>@Html.DisplayFor(m => m.Protocolo)</dd>
+    </dl>
+</div>
+
+<div>
+    <a href="@Url.Action("Edit", new { id = Model.VendaID })" class="btn btn-primary">Editar</a>
+    <a href="@Url.Action("Index")" class="btn btn-default">Voltar</a>
+</div>

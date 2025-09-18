@@ -1,0 +1,41 @@
+@model DesafioIntelectah.ViewModels.VendaViewModel
+
+@{
+    ViewBag.Title = "Excluir Venda";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Tem certeza que deseja excluir esta venda?</h3>
+<div class="form-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.VeiculoNome)</dt>
+        <dd>@Html.DisplayFor(m => m.VeiculoNome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.ConcessionariaNome)</dt>
+        <dd>@Html.DisplayFor(m => m.ConcessionariaNome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.ClienteNome)</dt>
+        <dd>@Html.DisplayFor(m => m.ClienteNome)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.ClienteCPF)</dt>
+        <dd>@Html.DisplayFor(m => m.ClienteCPF)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.DataVenda)</dt>
+        <dd>@Html.DisplayFor(m => m.DataVenda)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.PrecoVenda)</dt>
+        <dd>@Html.DisplayFor(m => m.PrecoVenda)</dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.VendaID" />
+    <div class="form-group">
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancelar</a>
+    </div>
+}
