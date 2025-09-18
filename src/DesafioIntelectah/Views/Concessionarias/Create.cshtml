@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Endereco, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Endereco, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Endereco, new { @class = "form-control", id = "Endereco" })
                 @Html.ValidationMessageFor(m => m.Endereco, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Cidade, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Cidade, new { @class = "form-control", id = "Cidade" })
                 @Html.ValidationMessageFor(m => m.Cidade, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Estado, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Estado, new { @class = "form-control", id = "Estado" })
                 @Html.ValidationMessageFor(m => m.Estado, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,8 +49,9 @@
         <div class="form-group">
             @Html.LabelFor(m => m.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.CEP, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.CEP, new { @class = "form-control", id = "CEP" })
                 @Html.ValidationMessageFor(m => m.CEP, "", new { @class = "text-danger" })
+                <span class="help-block">Ao sair do campo, o endereço será preenchido automaticamente.</span>
             </div>
         </div>
 
@@ -89,4 +90,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="/src/DesafioIntelectah/root/js/cep-lookup.js"></script>
 }
