@@ -67,6 +67,10 @@ namespace src.DesafioIntelectah.Controllers
             else if (venda.PrecoVenda > veiculo.Preco)
                 ModelState.AddModelError("PrecoVenda", "O preço de venda não pode ser maior que o preço do veículo.");
 
+            // Validação: veículo já vendido
+            if (await _context.Vendas.AnyAsync(v => v.VeiculoId == venda.VeiculoId && !v.IsDeleted))
+                ModelState.AddModelError("VeiculoId", "Este veículo já foi vendido e não pode ser vendido novamente.");
+
             // Validação de unicidade do protocolo
             if (await _context.Vendas.AnyAsync(v => v.ProtocoloVenda == venda.ProtocoloVenda))
                 ModelState.AddModelError("ProtocoloVenda", "Já existe uma venda com este protocolo. Tente novamente.");
@@ -107,9 +111,15 @@ namespace src.DesafioIntelectah.Controllers
                 ModelState.AddModelError("VeiculoId", "Selecione um veículo válido.");
             else if (venda.PrecoVenda > veiculo.Preco)
                 ModelState.AddModelError("PrecoVenda", "O preço de venda não pode ser maior que o preço do veículo.");
+
+            // Validação: veículo já vendido (exceto a própria venda)
+            if (await _context.Vendas.AnyAsync(v => v.VeiculoId == venda.VeiculoId && v.VendaId != venda.VendaId && !v.IsDeleted))
+                ModelState.AddModelError("VeiculoId", "Este veículo já foi vendido e não pode ser vendido novamente.");
+
             // Validação de unicidade do protocolo (exceto o próprio)
             if (await _context.Vendas.AnyAsync(v => v.ProtocoloVenda == venda.ProtocoloVenda && v.VendaId != venda.VendaId))
                 ModelState.AddModelError("ProtocoloVenda", "Já existe uma venda com este protocolo.");
+
             if (ModelState.IsValid)
             {
                 try
