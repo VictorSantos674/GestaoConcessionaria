@@ -5,8 +5,8 @@ Arquivos de configuração de usuário específicos do Visual Studio e do sistem
 *.sln.docstates
 
 Arquivos de compilação e saídas do build
-/bin/
-/obj/
+bin/
+obj/
 /release/
 /debug/
 
